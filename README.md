@@ -1,2 +1,2 @@
-##migrations file
-[Migration file] (./migrations)
+##migrations:
+*[Migrations folder] (../migrations)
