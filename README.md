@@ -1,2 +1,2 @@
 
-[Migrations folder] (migrations)
+[Migrations folder] (../LightBnB/migrations)
