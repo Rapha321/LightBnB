@@ -1,0 +1,3 @@
+# LightBnB
+
+[migrations folder](/migrations)
