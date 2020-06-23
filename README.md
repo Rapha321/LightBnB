@@ -1,2 +1,2 @@
 ##migrations:
-*[Migrations folder] (../migrations)
+*[Migrations folder] (migrations)
