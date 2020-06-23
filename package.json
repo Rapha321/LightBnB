@@ -1,0 +1,19 @@
+{
+  "name": "lightbnb",
+  "version": "1.0.0",
+  "description": "*[Migrations folder] (../migrations)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rapha321/LightBnB.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rapha321/LightBnB/issues"
+  },
+  "homepage": "https://github.com/Rapha321/LightBnB#readme"
+}
