@@ -1,2 +1,2 @@
 ##migrations file
-[Migration file] (./README.md)
+[Migration file] (./migrations)
