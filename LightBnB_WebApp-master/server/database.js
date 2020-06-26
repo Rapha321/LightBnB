@@ -37,7 +37,6 @@ const getUserWithEmail = function(email) {
     }
   })
   .catch(err => console.error('query error', err.stack));
-
 };
 exports.getUserWithEmail = getUserWithEmail;
 
@@ -62,7 +61,6 @@ const getUserWithId = function(id) {
     }
   })
   .catch(err => console.error('query error', err.stack));
-
 }
 exports.getUserWithId = getUserWithId;
 
@@ -93,7 +91,16 @@ exports.addUser = addUser;
  * @return {Promise<[{}]>} A promise to the reservations.
  */
 const getAllReservations = function(guest_id, limit = 10) {
-  return getAllProperties(null, 2);
+  return client.query(`
+    SELECT properties.*
+    FROM properties JOIN reservations ON properties.id = property_id
+    WHERE reservations.guest_id = $1
+    LIMIT $2;
+  `, [guest_id, limit])
+  .then(res => {
+    return Promise.resolve(res.rows)
+  })
+  .catch(err => console.error('query error', err.stack));
 }
 exports.getAllReservations = getAllReservations;
 
