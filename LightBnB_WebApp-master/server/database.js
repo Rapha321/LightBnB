@@ -1,15 +1,4 @@
-const { Client } = require('pg');
-
-const client = new Client({
-  user: 'vagrant',
-  password: '123',
-  host: 'localhost',
-  database: 'vagrant'
-});
-
-client.connect( () => {
-  console.log('Connected to the database...')
-});
+const db = require('./db/index.js')
 
 // const properties = require('./json/properties.json');
 // const users = require('./json/users.json');
@@ -22,7 +11,7 @@ client.connect( () => {
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithEmail = function(email) {
-  return client.query(`
+  return db.query(`
     SELECT * FROM users
     WHERE email = $1;
   `, [email])
@@ -47,7 +36,7 @@ exports.getUserWithEmail = getUserWithEmail;
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithId = function(id) {
-  return client.query(`
+  return db.query(`
     SELECT * FROM users
     WHERE id = $1;
   `, [id])
@@ -71,7 +60,7 @@ exports.getUserWithId = getUserWithId;
  * @return {Promise<{}>} A promise to the user.
  */
 const addUser =  function(user) {
-  return client.query(`
+  return db.query(`
     INSERT INTO users (name, email, password)
     VALUES ($1, $2, $3)
     RETURNING *;
@@ -91,7 +80,7 @@ exports.addUser = addUser;
  * @return {Promise<[{}]>} A promise to the reservations.
  */
 const getAllReservations = function(guest_id, limit = 10) {
-  return client.query(`
+  return db.query(`
     SELECT properties.*
     FROM properties JOIN reservations ON properties.id = property_id
     WHERE reservations.guest_id = $1
@@ -169,7 +158,7 @@ const getAllProperties = function(options, limit = 10) {
   `;
 
   // 5
-  return client.query(queryString, queryParams)
+  return db.query(queryString, queryParams)
   .then(res => res.rows);
 }
 exports.getAllProperties = getAllProperties;
@@ -203,12 +192,7 @@ const addProperty = function(property) {
     RETURNING *;
   `;
 
-  return client.query(queryString, queryParams).then(res => res.rows);
-
-  // const propertyId = Object.keys(properties).length + 1;
-  // property.id = propertyId;
-  // properties[propertyId] = property;
-  // return Promise.resolve(property);
+  return db.query(queryString, queryParams).then(res => res.rows);
 }
 exports.addProperty = addProperty;
 
